@@ -19,7 +19,7 @@ app.post('/create-order', async (req, res) => {
             });
         }
 
-        const response = await fetch('https://sandbox.cashfree.com/pg/orders', {
+        const response = await fetch('https://api.cashfree.com/pg/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,8 +76,8 @@ app.get('/', (req, res) => {
     </head>
     <body>
         <div class="checkout-box">
-            <div id="success-msg" class="success-msg">Sandbox Payment Successful!</div>
-            <h2>Test Payment (Sandbox)</h2>
+            <div id="success-msg" class="success-msg">Payment Successful!</div>
+            <h2>Make a Payment</h2>
             <p style="color: #555; margin-bottom: 25px;">Total Amount: <strong>₹10.00</strong></p>
             <button id="pay-btn">Pay Now</button>
         </div>
@@ -87,8 +87,8 @@ app.get('/', (req, res) => {
                 document.getElementById('success-msg').style.display = 'block';
             }
 
-            // Switched back to Sandbox mode!
-            const cashfree = Cashfree({ mode: "sandbox" });
+            // Switched to Production mode!
+            const cashfree = Cashfree({ mode: "production" });
 
             document.getElementById('pay-btn').addEventListener('click', async () => {
                 const payBtn = document.getElementById('pay-btn');
