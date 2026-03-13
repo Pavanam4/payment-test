@@ -3,9 +3,9 @@ const app = express();
 
 app.use(express.json());
 
-// --- PASTE YOUR NEW SANDBOX KEYS HERE ---
-const APP_ID = 'YOUR_NEW_SANDBOX_APP_ID';
-const SECRET_KEY = 'YOUR_NEW_SANDBOX_SECRET_KEY';
+// --- Credentials from environment variables ---
+const APP_ID = process.env.CASHFREE_APP_ID || 'YOUR_NEW_SANDBOX_APP_ID';
+const SECRET_KEY = process.env.CASHFREE_SECRET_KEY || 'YOUR_NEW_SANDBOX_SECRET_KEY';
 
 app.post('/create-order', async (req, res) => {
     try {
@@ -29,7 +29,8 @@ app.post('/create-order', async (req, res) => {
                 },
                 order_meta: {
                     // Sandbox allows localhost return URLs!
-                    return_url: 'http://localhost:3000/?status=success' 
+                    // Dynamic return URL for Vercel
+                    return_url: req.headers.origin + '/?status=success' 
                 }
             })
         });
